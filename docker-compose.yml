@@ -1,0 +1,41 @@
+version: '3.9'
+
+networks:
+  monitor-surl:
+    driver: bridge
+
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: surl-db
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - monitor-surl
+    ports:
+      - "5400:5432"
+  surl-api:
+    image: 'surl-api:latest'
+    build:
+      context: ./
+    depends_on:
+      - db
+    networks:
+      - monitor-surl
+    ports:
+      - "8080"
+    deploy:
+      mode: replicated
+      replicas: 2
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - monitor-surl
+    depends_on:
+      - surl-api
+    ports:
+      - "8000:8000"
