@@ -1,16 +1,15 @@
 package com.mukesh.surl.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import com.mukesh.surl.model.SmallUrl;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public class SurlRepository {
-  private final JdbcTemplate jdbcTemplate;
+public interface SurlRepository extends JpaRepository<SmallUrl, UUID> {
 
-  @Autowired
-  public SurlRepository(JdbcTemplate jdbcTemplate) {
-    this.jdbcTemplate = jdbcTemplate;
-  }
+  SmallUrl findBySmallUrl(String smallUrl);
 
+  boolean existsBySmallUrl(String smallUrl);
 }
