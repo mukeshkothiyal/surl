@@ -1,10 +1,12 @@
 <h1>Small Url Utility (SURL)</h1>
 
 <p>A basic utility to generate small url</p>
-<p>Generated small urls are persisted in the backend and can be used for redirection to original URLs
-The URL generated will be 5 character unique URL.
+<p>Generated small urls are persisted in the backend and can be used for redirection to original URLs. 
+The generated URL will be 5 character long with base 62. Max distinct records that can be generated: 916132832 (62^5)
 </p>
 Example URL generated is: <u><i>http://localhost:8000/vz1Mr</i></u>
+
+Application is running over Docker container. Nginx is used for routing user-requests.
 
 <h2>Design</h2>
 
@@ -14,6 +16,7 @@ Example URL generated is: <u><i>http://localhost:8000/vz1Mr</i></u>
 2. Springboot JPA
 3. Postgres
 4. Nginx
+5. Docker
 
 <h3>Container Diagram</h3>
 
