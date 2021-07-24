@@ -2,6 +2,7 @@ package com.mukesh.surl.handler;
 
 import com.mukesh.surl.exception.InvalidDataException;
 import lombok.extern.slf4j.Slf4j;
+import org.postgresql.util.PSQLException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,6 +20,14 @@ public class SurlExceptionHandler {
   @ResponseBody
   public String handleResourceNotFound(InvalidDataException ex) {
     log.error("InvalidDataException ::", ex);
+    return ex.getMessage();
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler({PSQLException.class})
+  @ResponseBody
+  public String handleResourceNotFound(PSQLException ex) {
+    log.error("PSQLException ::", ex);
     return ex.getMessage();
   }
 }

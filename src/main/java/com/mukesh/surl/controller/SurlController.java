@@ -59,7 +59,8 @@ public class SurlController {
    * @throws InvalidDataException if URL is not in accepted pattern
    */
   private void validateUrl(String url) throws InvalidDataException {
-    String regex = "((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)";
+    // added , and | for additional validation
+    String regex = "((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=,|]*)";
 
     Pattern p = Pattern.compile(regex);
     Matcher m = p.matcher(url);

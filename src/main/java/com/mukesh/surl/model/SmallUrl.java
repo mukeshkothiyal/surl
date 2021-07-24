@@ -20,7 +20,7 @@ public class SmallUrl {
   @GeneratedValue(strategy = GenerationType.AUTO)
   UUID id;
 
-  @Column(name = "url")
+  @Column(name = "url", length = 2000)
   String url;
 
   @Column(name = "small_url")
